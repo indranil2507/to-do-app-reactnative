@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Alert } from "react-native";
+import AddTodo from "./components/addToDo";
 import Header from "./components/header";
 import TodoItem from "./components/todoItem";
+
 export default function App() {
   const [todos, setTodos] = useState([
     { text: "buy coffee", key: "1" },
@@ -15,11 +17,26 @@ export default function App() {
     });
   };
 
+  const submitHandler = (text) => {
+    if (text.length > 3) {
+      setTodos((prevTodos) => {
+        return [{ text: text, key: Math.random().toString() }, ...prevTodos];
+      });
+    } else {
+      Alert.alert("OOPS", "Todos must be over 3 chars long", [
+        {
+          text: "Understood",
+          onPress: () => console.log("alert closed"),
+        },
+      ]);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        {/* add todo form */}
+        <AddTodo submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList
             data={todos}
