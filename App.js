@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Header from "./components/header";
 import TodoItem from "./components/todoItem";
-import AddTodo from "./components/addTodo";
+import AddTodo from "./components/addToDo";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -67,9 +67,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   content: {
+    flex: 1,
     padding: 40,
   },
   list: {
+    flex: 1,
     marginTop: 20,
   },
 });
